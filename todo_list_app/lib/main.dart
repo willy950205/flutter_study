@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list_app/screens/news_screen.dart';
 import './screens/login_screen.dart';
 import './screens/splash_screen.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'todo_list_app',
-      home: SplashScreen(),
+      home: NewsScreen(),
     );
   }
 }

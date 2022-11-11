@@ -1,16 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Todo {
   late int? id;
   late String title;
   late String description;
-  late DocumentReference? reference;
+  // late DocumentReference? reference;
 
-  Todo(
-      {this.id,
-      required this.title,
-      required this.description,
-      this.reference});
+  Todo({this.id, required this.title, required this.description});
 
   Map<String, dynamic> toMap() {
     return {'id': id, 'title': title, 'description': description};
@@ -22,11 +18,11 @@ class Todo {
     description = map?['description'];
   }
 
-  Todo.fromSnapshot(DocumentSnapshot document) {
-    Map<String, dynamic> map = document.data() as Map<String, dynamic>;
-    id = map['id'];
-    title = map['title'];
-    description = map['description'];
-    reference = document.reference;
-  }
+  // Todo.fromSnapshot(DocumentSnapshot document) {
+  //   Map<String, dynamic> map = document.data() as Map<String, dynamic>;
+  //   id = map['id'];
+  //   title = map['title'];
+  //   description = map['description'];
+  //   reference = document.reference;
+  // }
 }

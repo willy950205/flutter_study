@@ -13,14 +13,8 @@ class ListScreen extends StatefulWidget {
 class _ListScreenState extends State<ListScreen> {
   List<Todo> todos = [];
   bool isLoading = true;
-  TodoSqlite todoSqlite = TodoSqlite();
+  TodoDefault todoDefault = TodoDefault();
   //TodoFirebase todoFirebase = TodoFirebase();
-
-  Future initDb() async {
-    await todoSqlite.initDb().then((value) async {
-      todos = await todoSqlite.getTodos();
-    });
-  }
 
   @override
   void initState() {
@@ -28,10 +22,9 @@ class _ListScreenState extends State<ListScreen> {
     Timer(
       Duration(seconds: 2),
       () {
-        initDb().then((_) {
-          setState(() {
-            isLoading = false;
-          });
+        todos = todoDefault.getTodos();
+        setState(() {
+          isLoading = false;
         });
       },
     );
@@ -84,10 +77,10 @@ class _ListScreenState extends State<ListScreen> {
                     actions: [
                       TextButton(
                           onPressed: () async {
-                            await todoSqlite.addTodo(
+                            await todoDefault.addTodo(
                               Todo(title: title, description: description),
                             );
-                            List<Todo> newTodo = await todoSqlite.getTodos();
+                            List<Todo> newTodo = await todoDefault.getTodos();
                             setState(() {
                               print("[UI] ADD");
                               todos = newTodo;
@@ -182,10 +175,9 @@ class _ListScreenState extends State<ListScreen> {
                                                     title: title,
                                                     description: description,
                                                     id: todos[index].id);
-                                                await todoSqlite
-                                                    .updateTodo(newTodo);
+                                                todoDefault.updateTodo(newTodo);
                                                 List<Todo> newTodos =
-                                                    await todoSqlite.getTodos();
+                                                    todoDefault.getTodos();
                                                 setState(() {
                                                   todos = newTodos;
                                                 });
@@ -219,10 +211,10 @@ class _ListScreenState extends State<ListScreen> {
                                       actions: [
                                         TextButton(
                                             onPressed: () async {
-                                              await todoSqlite.deleteTodo(
+                                              todoDefault.deleteTodo(
                                                   todos[index].id ?? 0);
                                               List<Todo> newTodos =
-                                                  await todoSqlite.getTodos();
+                                                  todoDefault.getTodos();
 
                                               setState(() {
                                                 todos = newTodos;
