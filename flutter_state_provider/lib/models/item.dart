@@ -1,9 +1,6 @@
-
 class Item {
-  late int id;
-  late String title;
-  late int price;
-
-
-
+  final int id;
+  final String title;
+  final int price;
+  Item({required this.id, required this.title, required this.price});
 }
